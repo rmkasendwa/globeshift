@@ -6,6 +6,12 @@
     "dev:web": "pnpm --filter @globeshift/web dev",
     "dev:desktop": "pnpm --filter @globeshift/desktop tauri dev",
     "build": "pnpm -r --if-present build",
-    "typecheck": "pnpm -r --if-present typecheck"
+    "typecheck": "pnpm -r --if-present typecheck",
+    "format:check": "prettier --check .",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "^3.6.0",
+    "typescript": "^5.9.0"
   }
 }

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { cities, dateInZone, offsetLabel, offsetMinutes, searchCities, timeInZone } from '@globeshift/core';
 import { SpinningEarth } from '@globeshift/globe';
+import { Sessions } from './Sessions';
 
 const DEFAULT_CITIES = ['kampala', 'london', 'new-york', 'tokyo'];
 function storedCities(): string[] {
@@ -36,6 +37,6 @@ export function App() {
       </div>
       <div className="time-travel"><label htmlFor="time-offset">Compare times: {minutesAhead === 0 ? 'Now' : `${minutesAhead > 0 ? '+' : ''}${Math.round(minutesAhead / 60)} hours`}</label><input id="time-offset" type="range" min="-720" max="1440" step="30" value={minutesAhead} onChange={event => setMinutesAhead(Number(event.target.value))}/><button onClick={() => setMinutesAhead(0)}>Reset</button></div>
       <div className="clock-grid">{selected.map(id => { const city = cities.find(c => c.id === id); if (!city) return null; const diff = (offsetMinutes(displayedAt, city.timezone) - offsetMinutes(displayedAt, homeCity.timezone)) / 60; return <article className="clock-card" key={id}><button aria-label={`Remove ${city.name}`} onClick={() => setSelected(old => old.filter(value => value !== id))}>×</button><button className="focus" onClick={() => setFocused(city.id)} aria-label={`Focus globe on ${city.name}`}>◎ Focus</button><h3>{city.name}</h3><p>{city.country}</p><div className="clock">{timeInZone(displayedAt, city.timezone)}</div><small>{dateInZone(displayedAt, city.timezone)} · {offsetLabel(offsetMinutes(displayedAt, city.timezone))}</small><p className="difference">{diff === 0 ? 'Same time as home' : `${diff > 0 ? '+' : ''}${diff}h from ${homeCity.name}`}</p></article>; })}</div>
-    </section><footer>All times use IANA time zones and account for daylight saving.</footer>
+    </section><Sessions now={now}/><footer>All times use IANA time zones and account for daylight saving.</footer>
   </main>;
 }

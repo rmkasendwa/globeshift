@@ -1,0 +1,15 @@
+{
+  "name": "@globeshift/ui",
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.tsx"
+  },
+  "dependencies": {
+    "@globeshift/core": "workspace:*",
+    "react": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0"
+  }
+}
